@@ -10,11 +10,17 @@ import requests
 
 # User defined function to fetch movies poster from TMDB website.
 def fetch_poster(movie_id):
-    response = requests.get("https://api.themoviedb.org/3/movie/{}?api_key=0d78280c3c1d71310cc016b2893c6bf6&language-en-US".format(movie_id))
-    data = response.json()
+  api_key = st.secrets["TMDB_API_KEY"]
+  url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={api_key}&language=en-US"
 
-    return "https://image.tmdb.org/t/p/w500/"+ data['poster_path']
+  response = requests.get(url)
+  data = response.json()
 
+  poster_path = data.get("poster_path")
+  if poster_path:
+    return "https://image.tmdb.org/t/p/w500/" + poster_path
+  else:
+    return "https://placeholder.com"
 
 # Function will do the following actions
 # 1) - Function to find index number of the selected movie name.

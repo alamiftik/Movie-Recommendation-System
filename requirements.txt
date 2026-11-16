@@ -1,9 +1,8 @@
 numpy
 ast
-CountVectorizer
 nltk
-PorterStemmer
-cosine_similarity
 pickle
 streamlit
 requests
+scikit-learn
+nltk
